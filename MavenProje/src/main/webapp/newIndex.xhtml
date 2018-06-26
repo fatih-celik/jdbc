@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+<h:body>
+
+<h:form id="form">
+
+		<p:panelGrid columns="2">
+
+			<p:outputLabel value="İsim"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.ad}"></p:inputText>
+
+
+			<p:outputLabel value="Soyisim"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.soyad}" label="Soyisim"></p:inputText>
+
+
+			<p:outputLabel></p:outputLabel>
+			<p:commandButton value="Listele" process="form" update="form"
+				style="float:right;" actionListener="#{projeBean.ekle}"></p:commandButton>
+
+
+		</p:panelGrid>
+
+
+		<p:dataTable value="#{projeBean.studentList}" var="var">
+			<f:facet name="header">
+            Students
+        </f:facet>
+
+			<p:column headerText="ad">
+				<h:outputText value="#{var.ad}" />
+			</p:column>
+
+			<p:column headerText="soyad">
+				<h:outputText value="#{var.soyad}" />
+			</p:column>
+		</p:dataTable>
+
+
+
+	</h:form>
+
+</h:body>
+</html>

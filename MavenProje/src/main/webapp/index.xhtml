@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
+	<title>Maven JSF</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<p:panelGrid columns="4">
+
+			<p:outputLabel value="İsim"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.ad}" id="firstName"></p:inputText>
+
+
+			<p:outputLabel value="Soyisim"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.soyad}" id="lastName"></p:inputText>
+			
+			<p:outputLabel value="Sicil"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.sicilNo}" id="sicil"></p:inputText>
+			
+			<p:outputLabel value="Title"></p:outputLabel>
+			<p:inputText value="#{projeBean.student.title}" id="title"></p:inputText>
+				
+
+<!--  
+	
+			<p:outputLabel value="Mail"></p:outputLabel>
+			<p:inputText id="email" value="#{projeBean.student.email}" size="20"
+				required="true" label="Email Address">
+
+				 <f:validator validatorId="EmailVal" /> 
+
+			</p:inputText>
+			
+			<h:message for="email" style="color:red" />
+	
+ 
+-->
+
+
+
+		<p:commandButton value="Listele" process="@this firstName lastName sicil title "
+				update="form" style="float:right;"
+				actionListener="#{projeBean.ekle}"></p:commandButton>
+
+
+		</p:panelGrid>
+
+
+			
+			<p:dataTable value="#{projeBean.studentList}" var="var">
+			<f:facet name="header">
+            Ibtech AA Configuration
+        	</f:facet>
+
+
+			<p:column >
+				<f:facet name="header">Ad</f:facet>
+				<h:inputText value="#{var.ad}" size="10" rendered="#{var.editable}" />
+				<h:outputText value="#{var.ad}" rendered="#{not var.editable}" />
+			</p:column>
+
+			<p:column >
+				<f:facet name="header">Soyad</f:facet>
+				<h:inputText value="#{var.soyad}" size="10" rendered="#{var.editable}" />
+				<h:outputText value="#{var.soyad}" rendered="#{not var.editable}" />
+				
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Sicil</f:facet>
+				<h:inputText value="#{var.sicilNo}" size="10"
+					rendered="#{var.editable}" />
+				<h:outputText value="#{var.sicilNo}" rendered="#{not var.editable}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Title</f:facet>
+				<h:inputText value="#{var.title}" size="10"
+					rendered="#{var.editable}" />
+				<h:outputText value="#{var.title}" rendered="#{not var.editable}" />
+
+			</p:column>
+
+
+			<!--  
+			<p:column>
+				<f:facet name="header">Mail</f:facet>
+				<h:inputText value="#{var.email}" size="10"
+					rendered="#{var.editable}" />
+				<h:outputText value="#{var.email}" rendered="#{not var.editable}" />
+			</p:column>
+-->
+			<p:column>
+
+				<f:facet name="header">Sil</f:facet>
+
+				<h:commandButton value="Delete" action="#{projeBean.deleteAction(var)}" />
+
+			</p:column>
+ 
+			<p:column>
+				
+				
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="Edit" action="#{projeBean.editAction(var)}"
+											rendered="#{not var.editable}" />
+
+			</p:column>
+
+
+		</p:dataTable>
+		
+		 <h:commandButton value="Save Changes" action="#{projeBean.saveAction}" />
+		
+		
+	
+	</h:form>
+</h:body>
+
+
+
+</html>
